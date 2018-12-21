@@ -10,7 +10,7 @@
 
   <body>
     <% if user_signed_in? %>
-      <p class="name">ユーザー：<%= current_user.nickname %>さん</p>
+      <p class="name">ユーザー：<%= current_user.email %>さん</p>
       <ul class="nav">
         <li><a href="/new">新規投稿</a></li>
         <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>

@@ -6,20 +6,23 @@ class BlogsController < ApplicationController
 
   def new
     @article = Article.new()
+    @user_id = current_user.id
   end
 
   def create
     @article = Article.create(blog_params)
-    @article.save
+    @article.save!
   end
 
   def edit
     @article = Article.find(params[:id])
+    @user_id = params[:id]
   end
 
   def update
     @article = Article.find(params[:id])
-    @article.update(blog_params) if article.user_id === current_user.id
+    @article.update(blog_params) if @article.user_id === current_user.id
+    logger.debug @article.errors.inspect
   end
 
   def destroy
@@ -29,7 +32,7 @@ class BlogsController < ApplicationController
 
   private
   def blog_params
-    params.require(@article).permit(:title, :image, :content)
+    params.require(:article).permit(:title, :image, :content, :user_id)
   end
 
   private
