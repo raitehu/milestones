@@ -1,0 +1,18 @@
+<ul class="list_article">
+  <% @article.each do |article| %>
+  <li>
+    <h2><%= article.title %></h2>
+    <% if article.image != "" %>
+      <p><img src="<%= article.image %>"></p>
+    <% end %>
+    <p><%= article.content %></p>
+    <p><%= article.created_at %></p>
+  </li>
+    <% if user_signed_in? %>
+      <ul>
+        <li><%= link_to '編集', "/#{article.id}/edit", method: :get %></li>
+        <li><%= link_to '削除', "/#{article.id}", method: :delete %></li>
+      </ul>
+    <% end %>
+  <% end %>
+</ul>
